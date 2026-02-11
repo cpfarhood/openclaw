@@ -11,7 +11,7 @@ AI assistant that connects to messaging platforms and executes tasks autonomousl
 
 ## Prerequisites
 
-1. **Anthropic API Key** - Required for Claude models
+1. **Google API Key** - Required for Gemini models
 2. **Messaging Platform Tokens** - Optional (Telegram, Discord, Slack)
 3. **Sealed Secrets** - Controller running in cluster
 
@@ -23,7 +23,7 @@ AI assistant that connects to messaging platforms and executes tasks autonomousl
 # Create sealed secret with your API keys
 kubectl create secret generic openclaw-env-secret \
   --namespace=openclaw \
-  --from-literal=ANTHROPIC_API_KEY='sk-ant-xxx' \
+  --from-literal=GOOGLE_GENERATIVE_AI_API_KEY='your-gemini-api-key' \
   --dry-run=client -o yaml | \
   kubeseal --format yaml > secrets/sealedsecret-openclaw-env.yaml
 
@@ -61,7 +61,7 @@ The main configuration is in the HelmRelease `values.configMaps.config.data.open
 
 - **Gateway:** Port, trusted proxies
 - **Browser:** Chromium CDP settings
-- **Agents:** Claude model, timezone, concurrency
+- **Agents:** Gemini model, timezone, concurrency
 - **Session:** Storage and reset policy
 - **Logging:** Levels and format
 - **Tools:** Web search/fetch capabilities
@@ -70,7 +70,7 @@ The main configuration is in the HelmRelease `values.configMaps.config.data.open
 
 Sensitive values are injected via the `openclaw-env-secret`:
 
-- `ANTHROPIC_API_KEY` - **Required**
+- `GOOGLE_GENERATIVE_AI_API_KEY` - **Required**
 - `TELEGRAM_BOT_TOKEN` - Optional
 - `DISCORD_BOT_TOKEN` - Optional
 - `SLACK_BOT_TOKEN` - Optional

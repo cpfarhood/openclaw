@@ -60,7 +60,7 @@ spec:
                   "defaults": {
                     "workspace": "/home/node/.openclaw/workspace",
                     "model": {
-                      "primary": "anthropic/claude-opus-4-6"
+                      "primary": "google/gemini-2.0-flash-exp"
                     },
                     "userTimezone": "America/Detroit",
                     "timeoutSeconds": 600,
