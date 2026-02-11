@@ -31,8 +31,23 @@ spec:
 
       controllers:
         main:
-          replicas: 1  # OpenClaw is NOT horizontally scalable
+          replicas: 1 # OpenClaw is NOT horizontally scalable
           strategy: Recreate
+          containers:
+            main:
+              image:
+                repository: ghcr.io/openclaw/openclaw
+                pullPolicy: IfNotPresent
+              envFrom:
+                - secretRef:
+                    name: openclaw-env-secret
+              resources:
+                requests:
+                  cpu: 200m
+                  memory: 512Mi
+                limits:
+                  cpu: 2000m
+                  memory: 2Gi
 
       defaultPodOptions:
         securityContext:
@@ -49,7 +64,7 @@ spec:
                   "port": 18789,
                   "mode": "local",
                   // Update with your Cilium/Traefik LoadBalancer IPs
-                  "trustedProxies": ["10.42.0.1"]
+                  "trustedProxies": ["172.18.0.0/20"]
                 },
                 "browser": {
                   "enabled": true,
@@ -109,22 +124,6 @@ spec:
                 }
                 // Add channel configuration via openclaw-env-secret
               }
-
-      containers:
-        main:
-          image:
-            repository: ghcr.io/openclaw/openclaw
-            pullPolicy: IfNotPresent
-          envFrom:
-            - secretRef:
-                name: openclaw-env-secret
-          resources:
-            requests:
-              cpu: 200m
-              memory: 512Mi
-            limits:
-              cpu: 2000m
-              memory: 2Gi
 
         chromium:
           enabled: true
