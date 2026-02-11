@@ -34,6 +34,11 @@ spec:
           replicas: 1  # OpenClaw is NOT horizontally scalable
           strategy: Recreate
 
+      defaultPodOptions:
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+
       configMaps:
         config:
           enabled: true
@@ -150,4 +155,4 @@ spec:
           type: persistentVolumeClaim
           accessMode: ReadWriteOnce
           size: 5Gi
-          storageClass: rook-ceph-block  # Adjust for your cluster
+          storageClass: ceph-block
