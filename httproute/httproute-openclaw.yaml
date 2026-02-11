@@ -9,7 +9,7 @@ spec:
     - name: internal
       namespace: gateway-system
   hostnames:
-    - openclaw.animaniacs.farh.net
+    - openclaw.${CLUSTER_NAME}.${CLUSTER_SUFFIX}
   rules:
     - matches:
         - path:
