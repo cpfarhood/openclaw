@@ -49,6 +49,16 @@ spec:
                   cpu: 2000m
                   memory: 2Gi
 
+            chromium:
+              enabled: true
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+                limits:
+                  cpu: 1000m
+                  memory: 1Gi
+
       defaultPodOptions:
         securityContext:
           seccompProfile:
@@ -124,16 +134,6 @@ spec:
                 }
                 // Add channel configuration via openclaw-env-secret
               }
-
-            chromium:
-              enabled: true
-              resources:
-                requests:
-                  cpu: 100m
-                  memory: 256Mi
-                limits:
-                  cpu: 1000m
-                  memory: 1Gi
 
       service:
         main:
